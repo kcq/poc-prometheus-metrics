@@ -23,6 +23,9 @@ clean:
 fmt:
 	'$(CURDIR)/scripts/fmt.sh'
 
+inspect:
+	'$(CURDIR)/scripts/inspect.sh'
+
 run_container:
 	docker run -it --rm --name="prom-metrics-service" -p 7000:7000 poc/prom-metrics-service
 

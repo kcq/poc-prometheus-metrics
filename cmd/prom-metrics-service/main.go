@@ -23,7 +23,7 @@ import (
 
 var (
 	instrumentMetrics = false
-	//pid = os.Getpid()
+	pid = os.Getpid()
 	registry = prometheus.NewRegistry()
 )
 
@@ -91,7 +91,7 @@ func init() {
 }
 
 func main() {
-	fmt.Println("Prom PoC pid =", os.Getpid())
+	fmt.Println("Prom PoC pid =", pid)
 
 	r := chi.NewRouter()
 
@@ -106,7 +106,7 @@ func main() {
 		hcode := 200
 
 		result := map[string]interface{}{
-			"pid":  os.Getpid(),
+			"pid":  pid,
 			"data": "something",
 		}
 
