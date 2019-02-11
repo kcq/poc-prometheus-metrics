@@ -23,8 +23,8 @@ import (
 
 var (
 	instrumentMetrics = false
-	pid = os.Getpid()
-	registry = prometheus.NewRegistry()
+	pid               = os.Getpid()
+	registry          = prometheus.NewRegistry()
 )
 
 var basicHandler = promhttp.HandlerFor(
@@ -114,11 +114,12 @@ func main() {
 		fmt.Println("doing work (random sleep to 290 ms) -", rv)
 		time.Sleep(time.Millisecond * time.Duration(rv))
 
-		render.JSON(w, r, &result)
-
 		dtime := time.Since(stime)
 		ms := uint64(dtime / time.Millisecond)
 		fmt.Printf("worked for %v milliseconds\n", ms)
+		result["wtime"] = ms
+		render.JSON(w, r, &result)
+
 		callHistogram.WithLabelValues(fmt.Sprintf("%d", hcode)).Observe(float64(ms))
 		callSummary.WithLabelValues(fmt.Sprintf("%d", hcode)).Observe(float64(ms))
 	})

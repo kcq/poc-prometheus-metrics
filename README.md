@@ -13,10 +13,12 @@ The PoC services exposes a dummy API on port 7000. The Prometheus metrics is exp
 * Make HTTP calls to the PoC service (`curl http://localhost:7000`).
 * Use Prom UI (`http://localhost:9090`) or Grafana (`http://localhost:3000`) to see the generated metrics
 * Access the `/metrics` endpoint (`curl http://localhost:7000/metrics`) if you want to see the raw metrics exposed by the PoC service.
+* You can observe the Docker Compose logs with `make tail`.
+* Destroy the demo containers with `make down`.
 
 Note:
 
-The Grafana dashboard requires authentication. The PoC Grafana setup uses the default credentials (user: admin , password: admin). Grafana will prompt you to change the password on first login (you can skip this step). The PoC Grafana is not configured, so you'll need to add the Prometheus data source (set url to `http://prometheus:9090` and type to `prometheus`) and create your own dashboard (future PoC enhancement).
+The Grafana dashboard requires authentication (user: `poc`, password: `prometheus`). In addition to the preconfigured Prometheus data source the PoC Grafana is preconfigured with a simple PoC dashboard (called `PoC`), a dashboard that will show Go runtime and process info (`Go Processes`) and a couple of Prometheus dashboards (`Prometheus Stats`,`Prometheus 2.0 Stats`).
 
 ### Run Standalone Service in Docker (no Prometheus and Grafana)
 
